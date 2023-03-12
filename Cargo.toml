@@ -1,0 +1,17 @@
+[package]
+name = "druid-wgpu"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+druid = "0.8.3"
+futures-intrusive = "0.5.0"
+image = "0.24.5"
+pollster = "0.3.0"
+wgpu = "0.15.1"
+
+[dev-dependencies]
+piet-common = { version = "0.6.2", features = ["png"] }
+piet-direct2d = "0.6.2"
