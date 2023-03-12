@@ -9,11 +9,11 @@ fn main() {
     println!("Hello, world!");
 
     let adapter = pollster::block_on(
-        druid_wgpu::default_adapter()
+        druid_wgpu_utils::default_adapter()
     );
 
     let mut renderer = pollster::block_on(
-        druid_wgpu::WgpuRenderer::from_adapter(adapter)
+        druid_wgpu_utils::WgpuRenderer::from_adapter(adapter)
     );
 
     let my_widget = MyWidget {
@@ -31,7 +31,7 @@ fn main() {
 }
 
 struct MyWidget {
-    wgpu_renderer: druid_wgpu::WgpuRenderer,
+    wgpu_renderer: druid_wgpu_utils::WgpuRenderer,
     my_renderer: MyRenderer,
 }
 
@@ -66,7 +66,7 @@ impl druid::Widget<()> for MyWidget {
                 self.my_renderer.render(size, tools);
             },
             |frame_data, size, row_pitch| {
-                druid_wgpu::default_paint(ctx, frame_data, size, row_pitch);
+                druid_wgpu_utils::default_paint(ctx, frame_data, size, row_pitch);
             }
         ).unwrap();
     }
@@ -76,7 +76,7 @@ trait Renderer {
     fn render(
         &mut self,
         size: (u32, u32),
-        tools: &mut druid_wgpu::RenderTools,
+        tools: &mut druid_wgpu_utils::RenderTools,
     );
 }
 
@@ -166,7 +166,7 @@ impl Renderer for MyRenderer {
     fn render(
         &mut self,
         size: (u32, u32),
-        tools: &mut druid_wgpu::RenderTools,
+        tools: &mut druid_wgpu_utils::RenderTools,
     ) {
         let desc = wgpu::RenderPassDescriptor {
             label: Some("Render Pass"),
